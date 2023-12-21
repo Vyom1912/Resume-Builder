@@ -32,10 +32,10 @@ function addNewEDField() {
 function generateCV() {
   document.getElementById("nameT1").innerHTML =
     document.getElementById("nameField").value;
-  document.getElementById("nameT2").innerHTML = nameT2.innerHTML = nameField;
+  document.getElementById("nameT2").innerHTML = document.getElementById("nameField").value;
   // contect
-  document.getElementById("conNumField").value.innerHTML =
-    document.getElementById("contectT");
+  document.getElementById("contectT").innerHTML =document.getElementById("conNumField").value
+    ;
 
   // address
   document.getElementById("addressT").innerHTML =
