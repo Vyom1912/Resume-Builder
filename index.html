@@ -3,99 +3,237 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Resume-builder</title>
+    <title>Resume-Builder</title>
+    <link rel="shortcut icon" href="icon.png" type="image/x-icon" />
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous" />
   </head>
   <body>
-    <header class="header">
-      <div class="logo-box">
-        <div class="logo"><img src="images/curriculum-vitae.png" alt="" /></div>
-        <div class="logo-text">Build <span>Resume</span></div>
-      </div>
-    </header>
-    <main>
-      <div class="container">
-        <div class="main-small-head bg-bright">
-          <h3>ONLINE RESUME BUILDER</h3>
-          <div class="re-head-text">
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt
-              animi hic accusamus suscipit dolores aspernatur necessitatibus cum
-              ea sapiente tempora velit, exercitationem recusandae non.
-              Repudiandae optio rerum dolorum eum laudantium eius, numquam
-              facilis excepturi vitae amet dignissimos aut dolore labore.
-            </p>
+    <div class="shadow-none p-3 mb-5 bg-light rounded">
+      <h1 class="text-center my-2">Resume Builder</h1>
+      <p class="text-center my-0">build your cv with us</p>
+    </div>
+    <div class="container" id="cv-form">
+      <div class="row mt-4">
+        <div class="col-md-6">
+          <h3>Personal Information</h3>
+
+          <div class="form-group">
+            <label for="nameField">Your Name</label>
+            <input
+              type="text"
+              name=""
+              id="nameField"
+              class="form-control"
+              placeholder="e.g. jeo" />
           </div>
-          <div class="re-head-button">
-            <div class="re-btn"><a href="resume.html">create my resume</a></div>
+          <div class="form-group mt-2">
+            <label for="conNumField"> Contect Number</label>
+            <input
+              type="number"
+              name=""
+              id="conNumField"
+              class="form-control"
+              placeholder="e.g. 646464XXXX" />
           </div>
-          <div class="re-head-img">
-            <img src="images/dublin-resume-templates.avif" alt="" />
+          <div class="form-group">
+            <label for="addressField">Address</label>
+            <textarea
+              name=""
+              id="addressField"
+              class="form-control"
+              cols="30"
+              rows="3"
+              placeholder="e.g. gujarat"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="photoField">Select your image</label>
+            <input type="file" class="form-control" id="photoField" />
+          </div>
+
+          <h3 class="mt-1">Important links</h3>
+          <div class="form-group">
+            <label for="faceField">Facebook-link</label>
+            <input
+              type="text"
+              name=""
+              id="faceField"
+              class="form-control"
+              placeholder="e.g. facebook.com" />
+          </div>
+          <div class="form-group">
+            <label for="instaField">Instagram-link</label>
+            <input
+              type="text"
+              name=""
+              id="instaField"
+              class="form-control"
+              placeholder="e.g. instagram.com" />
+          </div>
+          <div class="form-group">
+            <label for="linkedField">Linked in-link</label>
+            <input
+              type="text"
+              name=""
+              id="linkedField"
+              class="form-control"
+              placeholder="e.g. linkedin.com" />
           </div>
         </div>
-        <div class="re-main-box">
-          <div class="re-main-left">
-            <img
-              src="images/visual-0c7080adf17f1f207276f613447c924f667dab34b7ac415cd7ef653172defd0b.svg"
-              alt=""
-            />
+        <div class="col-md-6">
+          <h3>Professional Information</h3>
+          <div class="form-group">
+            <label for="">Objective</label>
+            <textarea
+              class="form-control"
+              placeholder="Enter here"
+              rows="4"
+              id="objective"></textarea>
           </div>
-          <div class="re-main-right">
-            <h2>Use the best resume builder with us</h2>
-            <p>
-              Getting that dream job can seem like an impossible task. We're
-              here to change that. Give yourself a real advantage with the best
-              online resume maker: created by experts, imporved by data, trusted
-              by millions of professionals.
-            </p>
-            <div class="re-btn">
-              <a href="resume.html">let's make resume</a>
+          <!--  -->
+          <div class="form-group" id="we">
+            <label for="">Work Experience</label>
+            <textarea
+              class="form-control weField"
+              placeholder="Enter here"
+              rows="3"></textarea>
+            <!-- new text area -->
+            <div class="container text-center mt-2" id="weAddButton">
+              <button class="btn btn-primary btn-sm" onclick="addNewWEField()">
+                Add
+              </button>
+            </div>
+          </div>
+          <!--  -->
+          <div class="form-group" id="ed">
+            <label for="">Academic Qulification</label>
+            <textarea
+              class="form-control edField"
+              placeholder="Enter here"
+              rows="3"></textarea>
+            <div class="container text-center mt-2" id="edAddButton">
+              <button class="btn btn-primary btn-sm" onclick="addNewEDField()">
+                Add
+              </button>
             </div>
           </div>
         </div>
-        <div class="re-info">
-          <div class="re-info-box">
-            <img
-              src="images/feature-1-edf4481d69166ac81917d1e40e6597c8d61aa970ad44367ce78049bf830fbda5.svg"
-              alt=""
-            />
-            <h3>Make a resume that wins interviews!</h3>
-            <p>
-              Use our resume maker with its advanced creation tools to tell
-              professional story that engages recruiters, hiring managers and
-              even CEOs.
-            </p>
+      </div>
+      <!-- generate btn -->
+      <div class="container text-center">
+        <button onclick="generateCV()" class="btn btn-primary btn-lg mb-5">
+          Generate CV
+        </button>
+      </div>
+    </div>
+
+    <!-- cv tempalate -->
+    <div class="container" id="cv-template">
+      <div class="row">
+        <div class="col-md-4 text-center bg-info py-4">
+          <!-- fist-column -->
+          <img
+            src="/images/person.png"
+            class="img-fluid border rounded-circle"
+            id="photoT"
+            style="width: 200px; height: 200px" />
+          <div class="container">
+            <p id="nameT1">Vyom patel</p>
+            <p id="contectT">+91 767676767676</p>
+            <p id="addressT">sector-4 , jhfvlkjngf</p>
+            <hr />
+            <p><a id="fbT" href="#">www//faceboock.com/vyom</a></p>
+            <p><a id="instaT" href="#">www//instagram.com/vyom</a></p>
+            <p><a id="liT" href="#">www//linkedin.com/vyom</a></p>
           </div>
-          <div class="re-info-box">
-            <img
-              src="images/feature-2-a7a471bd973c02a55d1b3f8aff578cd3c9a4c5ac4fc74423d94ecc04aef3492b.svg"
-              alt=""
-            />
-            <h3>Resume writing made easy!</h3>
-            <p>
-              Resume writing has never been this effortless. Pre-generated text,
-              visual designs and more - all already integrated into the resume
-              maker. Just fill in your details.
-            </p>
+        </div>
+        <div class="col-md-8 py-4">
+          <!-- second column -->
+          <h1 id="nameT2" class="text-center" style="font-weight: 800">
+            Vyom Patel
+          </h1>
+          <!-- objective card -->
+          <div class="card mt-0">
+            <div class="card-header bg-info">
+              <h3>Objective</h3>
+            </div>
+            <div class="card-body">
+              <p class="ml-3" id="objectiveT">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi
+                facere sunt commodi tenetur praesentium illum perferendis
+                aperiam quidem saepe provident sed laboriosam similique vero
+                quam cum porro ut, eos libero.
+              </p>
+            </div>
           </div>
-          <div class="re-info-box">
-            <img
-              src="images/feature-3-4e87a82f83e260488c36f8105e26f439fdc3ee5009372bb5e12d9421f32eabdd.svg"
-              alt=""
-            />
-            <h3>A recruiter-tested CV maker tool</h3>
-            <p>
-              Our resume builder and its pre-generated content are tested by
-              recruiters and IT experts. We help your CV become truly
-              competitive in the hiring process.
-            </p>
+          <!-- work experience card -->
+          <div class="card mt-0">
+            <div class="card-header bg-info">
+              <h3>Work Experience</h3>
+            </div>
+            <div class="card-body ml-3">
+              <ul id="weT">
+                <li>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Dolor, odio?
+                </li>
+                <li>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Dolor, odio?
+                </li>
+                <li>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Dolor, odio?
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- education qulification card -->
+          <div class="card mt-0">
+            <div class="card-header bg-info">
+              <h3>Academic Qualification</h3>
+            </div>
+            <div class="card-body ml-3">
+              <ul id="edT">
+                <li>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Dolor, odio?
+                </li>
+                <li>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Dolor, odio?
+                </li>
+                <li>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Dolor, odio?
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="container mt-3 text-center">
+            <button onclick="printCV()" class="btn bg-info">Print</button>
           </div>
         </div>
       </div>
-    </main>
-    <!-- footer -->
-    <footer class="footer">
-      ©Copyright 2024. All Rights Reserved - <a href="#">Vyom Patel</a>
-    </footer>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
+
+    <script src="script.js"></script>
   </body>
 </html>
