@@ -1,239 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Resume-Builder</title>
-    <link rel="shortcut icon" href="icon.png" type="image/x-icon" />
-    <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous" />
-  </head>
-  <body>
-    <div class="shadow-none p-3 mb-5 bg-light rounded">
-      <h1 class="text-center my-2">Resume Builder</h1>
-      <p class="text-center my-0">build your cv with us</p>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>résumé.tex — LaTeX-style Resume Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ============ TOP BAR ============ -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">\resume<span class="brand-brace">{}</span></span>
+      <span class="brand-sub">a document you write, not a form you fill</span>
     </div>
-    <div class="container" id="cv-form">
-      <div class="row mt-4">
-        <div class="col-md-6">
-          <h3>Personal Information</h3>
+    <div class="topbar-actions">
+      <span class="compile-status" id="compileStatus" aria-live="polite">compiled ✓</span>
+      <button class="btn btn-ghost" id="resetBtn" type="button">Clear all</button>
+      <button class="btn btn-primary" id="printBtn" type="button">Download PDF</button>
+    </div>
+  </header>
 
-          <div class="form-group">
-            <label for="nameField">Your Name</label>
-            <input
-              type="text"
-              name=""
-              id="nameField"
-              class="form-control"
-              placeholder="e.g. jeo" />
-          </div>
-          <div class="form-group mt-2">
-            <label for="conNumField"> Contect Number</label>
-            <input
-              type="number"
-              name=""
-              id="conNumField"
-              class="form-control"
-              placeholder="e.g. 646464XXXX" />
-          </div>
-          <div class="form-group">
-            <label for="addressField">Address</label>
-            <textarea
-              name=""
-              id="addressField"
-              class="form-control"
-              cols="30"
-              rows="3"
-              placeholder="e.g. gujarat"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="photoField">Select your image</label>
-            <input type="file" class="form-control" id="photoField" />
-          </div>
+  <!-- ============ WORKSPACE ============ -->
+  <main class="workspace">
 
-          <h3 class="mt-1">Important links</h3>
-          <div class="form-group">
-            <label for="faceField">Facebook-link</label>
-            <input
-              type="text"
-              name=""
-              id="faceField"
-              class="form-control"
-              placeholder="e.g. facebook.com" />
+    <!-- ---------- EDITOR (source) ---------- -->
+    <section class="editor" id="editorPane" aria-label="Resume source editor">
+
+      <div class="editor-scroll">
+
+        <p class="src-comment">% ---------------------------------------------------------</p>
+        <p class="src-comment">% PERSONAL INFORMATION</p>
+        <p class="src-comment">% ---------------------------------------------------------</p>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="fullName">\name</label>
+            <input type="text" id="fullName" placeholder="Vyom Patel" />
           </div>
-          <div class="form-group">
-            <label for="instaField">Instagram-link</label>
-            <input
-              type="text"
-              name=""
-              id="instaField"
-              class="form-control"
-              placeholder="e.g. instagram.com" />
-          </div>
-          <div class="form-group">
-            <label for="linkedField">Linked in-link</label>
-            <input
-              type="text"
-              name=""
-              id="linkedField"
-              class="form-control"
-              placeholder="e.g. linkedin.com" />
+          <div class="field">
+            <label for="role">\title</label>
+            <input type="text" id="role" placeholder="Full Stack JavaScript Developer" />
           </div>
         </div>
-        <div class="col-md-6">
-          <h3>Professional Information</h3>
-          <div class="form-group">
-            <label for="">Objective</label>
-            <textarea
-              class="form-control"
-              placeholder="Enter here"
-              rows="4"
-              id="objective"></textarea>
+
+        <div class="field-row field-row-3">
+          <div class="field">
+            <label for="email">\email</label>
+            <input type="email" id="email" placeholder="you@example.com" />
           </div>
-          <!--  -->
-          <div class="form-group" id="we">
-            <label for="">Work Experience</label>
-            <textarea
-              class="form-control weField"
-              placeholder="Enter here"
-              rows="3"></textarea>
-            <!-- new text area -->
-            <div class="container text-center mt-2" id="weAddButton">
-              <button class="btn btn-primary btn-sm" onclick="addNewWEField()">
-                Add
-              </button>
-            </div>
+          <div class="field">
+            <label for="phone">\phone</label>
+            <input type="tel" id="phone" placeholder="+91 90000 00000" />
           </div>
-          <!--  -->
-          <div class="form-group" id="ed">
-            <label for="">Academic Qulification</label>
-            <textarea
-              class="form-control edField"
-              placeholder="Enter here"
-              rows="3"></textarea>
-            <div class="container text-center mt-2" id="edAddButton">
-              <button class="btn btn-primary btn-sm" onclick="addNewEDField()">
-                Add
-              </button>
-            </div>
+          <div class="field">
+            <label for="location">\address</label>
+            <input type="text" id="location" placeholder="Ahmedabad, Gujarat" />
           </div>
         </div>
-      </div>
-      <!-- generate btn -->
-      <div class="container text-center">
-        <button onclick="generateCV()" class="btn btn-primary btn-lg mb-5">
-          Generate CV
-        </button>
-      </div>
-    </div>
 
-    <!-- cv tempalate -->
-    <div class="container" id="cv-template">
-      <div class="row">
-        <div class="col-md-4 text-center bg-info py-4">
-          <!-- fist-column -->
-          <img
-            src="/images/person.png"
-            class="img-fluid border rounded-circle"
-            id="photoT"
-            style="width: 200px; height: 200px" />
-          <div class="container">
-            <p id="nameT1">Vyom patel</p>
-            <p id="contectT">+91 767676767676</p>
-            <p id="addressT">sector-4 , jhfvlkjngf</p>
+        <div class="field-row field-row-3">
+          <div class="field">
+            <label for="linkedin">\social{linkedin}</label>
+            <input type="text" id="linkedin" placeholder="linkedin.com/in/username" />
+          </div>
+          <div class="field">
+            <label for="github">\social{github}</label>
+            <input type="text" id="github" placeholder="github.com/username" />
+          </div>
+          <div class="field">
+            <label for="website">\social{website}</label>
+            <input type="text" id="website" placeholder="yourportfolio.dev" />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <label class="checkbox-field">
+            <input type="checkbox" id="photoToggle" />
+            <span>include a photo</span>
+          </label>
+          <div class="field field-photo" id="photoFieldWrap" hidden>
+            <label for="photoField">\photo</label>
+            <input type="file" id="photoField" accept="image/*" />
+          </div>
+        </div>
+
+        <p class="src-comment">% ---------------------------------------------------------</p>
+        <p class="src-comment">% SUMMARY</p>
+        <p class="src-comment">% ---------------------------------------------------------</p>
+
+        <div class="field">
+          <label for="summary">\begin{summary}</label>
+          <textarea id="summary" rows="3" placeholder="One or two sentences on who you are and what you're looking for."></textarea>
+        </div>
+
+        <p class="src-comment">% ---------------------------------------------------------</p>
+        <p class="src-comment">% EXPERIENCE</p>
+        <p class="src-comment">% ---------------------------------------------------------</p>
+        <div class="entries" id="experienceList"></div>
+        <button class="btn btn-add" type="button" data-add="experience">+ \item{experience}</button>
+
+        <p class="src-comment">% ---------------------------------------------------------</p>
+        <p class="src-comment">% PROJECTS</p>
+        <p class="src-comment">% ---------------------------------------------------------</p>
+        <div class="entries" id="projectList"></div>
+        <button class="btn btn-add" type="button" data-add="project">+ \item{project}</button>
+
+        <p class="src-comment">% ---------------------------------------------------------</p>
+        <p class="src-comment">% EDUCATION</p>
+        <p class="src-comment">% ---------------------------------------------------------</p>
+        <div class="entries" id="educationList"></div>
+        <button class="btn btn-add" type="button" data-add="education">+ \item{education}</button>
+
+        <p class="src-comment">% ---------------------------------------------------------</p>
+        <p class="src-comment">% SKILLS</p>
+        <p class="src-comment">% ---------------------------------------------------------</p>
+        <div class="field">
+          <label for="skills">\skillset  (comma separated)</label>
+          <textarea id="skills" rows="2" placeholder="JavaScript, React, Node.js, MongoDB, Git"></textarea>
+        </div>
+
+        <p class="src-comment">% ---------------------------------------------------------</p>
+        <p class="src-comment">% CERTIFICATIONS</p>
+        <p class="src-comment">% ---------------------------------------------------------</p>
+        <div class="entries" id="certList"></div>
+        <button class="btn btn-add" type="button" data-add="cert">+ \item{certification}</button>
+
+        <p class="src-comment">% \end{document}</p>
+      </div>
+    </section>
+
+    <!-- ---------- PREVIEW (compiled output) ---------- -->
+    <section class="preview" id="previewPane" aria-label="Compiled resume preview">
+      <div class="preview-scroll">
+        <div class="page" id="resumePage">
+
+          <header class="r-header">
+            <img id="rPhoto" class="r-photo" alt="" hidden />
+            <h1 id="rName">Your Name</h1>
+            <p id="rRole" class="r-role"></p>
+            <p class="r-contact" id="rContact"></p>
+            <p class="r-links" id="rLinks"></p>
+          </header>
+
+          <section class="r-section" id="rSummarySection" hidden>
+            <h2>Summary</h2>
             <hr />
-            <p><a id="fbT" href="#">www//faceboock.com/vyom</a></p>
-            <p><a id="instaT" href="#">www//instagram.com/vyom</a></p>
-            <p><a id="liT" href="#">www//linkedin.com/vyom</a></p>
-          </div>
-        </div>
-        <div class="col-md-8 py-4">
-          <!-- second column -->
-          <h1 id="nameT2" class="text-center" style="font-weight: 800">
-            Vyom Patel
-          </h1>
-          <!-- objective card -->
-          <div class="card mt-0">
-            <div class="card-header bg-info">
-              <h3>Objective</h3>
-            </div>
-            <div class="card-body">
-              <p class="ml-3" id="objectiveT">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi
-                facere sunt commodi tenetur praesentium illum perferendis
-                aperiam quidem saepe provident sed laboriosam similique vero
-                quam cum porro ut, eos libero.
-              </p>
-            </div>
-          </div>
-          <!-- work experience card -->
-          <div class="card mt-0">
-            <div class="card-header bg-info">
-              <h3>Work Experience</h3>
-            </div>
-            <div class="card-body ml-3">
-              <ul id="weT">
-                <li>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Dolor, odio?
-                </li>
-                <li>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Dolor, odio?
-                </li>
-                <li>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Dolor, odio?
-                </li>
-              </ul>
-            </div>
-          </div>
-          <!-- education qulification card -->
-          <div class="card mt-0">
-            <div class="card-header bg-info">
-              <h3>Academic Qualification</h3>
-            </div>
-            <div class="card-body ml-3">
-              <ul id="edT">
-                <li>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Dolor, odio?
-                </li>
-                <li>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Dolor, odio?
-                </li>
-                <li>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Dolor, odio?
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="container mt-3 text-center">
-            <button onclick="printCV()" class="btn bg-info">Print</button>
-          </div>
+            <p id="rSummary"></p>
+          </section>
+
+          <section class="r-section" id="rExperienceSection" hidden>
+            <h2>Experience</h2>
+            <hr />
+            <div id="rExperience"></div>
+          </section>
+
+          <section class="r-section" id="rProjectSection" hidden>
+            <h2>Projects</h2>
+            <hr />
+            <div id="rProjects"></div>
+          </section>
+
+          <section class="r-section" id="rEducationSection" hidden>
+            <h2>Education</h2>
+            <hr />
+            <div id="rEducation"></div>
+          </section>
+
+          <section class="r-section" id="rSkillsSection" hidden>
+            <h2>Skills</h2>
+            <hr />
+            <p class="r-skills" id="rSkills"></p>
+          </section>
+
+          <section class="r-section" id="rCertSection" hidden>
+            <h2>Certifications</h2>
+            <hr />
+            <div id="rCerts"></div>
+          </section>
+
+          <p class="r-empty" id="rEmpty">Start typing on the left — your compiled résumé will appear here.</p>
+
         </div>
       </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ---------- entry templates (cloned by JS, never shown directly) ---------- -->
+<template id="tpl-experience">
+  <div class="entry-card" data-kind="experience">
+    <div class="entry-card-head">
+      <span class="entry-tag">experience</span>
+      <button class="entry-remove" type="button" aria-label="Remove this entry">✕</button>
     </div>
+    <div class="field-row">
+      <div class="field"><label>role</label><input type="text" data-key="title" placeholder="Software Engineer" /></div>
+      <div class="field"><label>company</label><input type="text" data-key="company" placeholder="Company Name" /></div>
+    </div>
+    <div class="field-row field-row-3">
+      <div class="field"><label>location</label><input type="text" data-key="location" placeholder="City, Country" /></div>
+      <div class="field"><label>start</label><input type="text" data-key="start" placeholder="Jan 2024" /></div>
+      <div class="field"><label>end</label><input type="text" data-key="end" placeholder="Present" /></div>
+    </div>
+    <div class="field">
+      <label>highlights — one per line</label>
+      <textarea rows="3" data-key="bullets" placeholder="Built X that improved Y by Z%"></textarea>
+    </div>
+  </div>
+</template>
 
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"></script>
+<template id="tpl-project">
+  <div class="entry-card" data-kind="project">
+    <div class="entry-card-head">
+      <span class="entry-tag">project</span>
+      <button class="entry-remove" type="button" aria-label="Remove this entry">✕</button>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>name</label><input type="text" data-key="title" placeholder="Project Name" /></div>
+      <div class="field"><label>stack</label><input type="text" data-key="stack" placeholder="React, Node.js, MongoDB" /></div>
+    </div>
+    <div class="field">
+      <label>link (optional)</label>
+      <input type="text" data-key="link" placeholder="github.com/you/project" />
+    </div>
+    <div class="field">
+      <label>highlights — one per line</label>
+      <textarea rows="3" data-key="bullets" placeholder="What it does and what you built"></textarea>
+    </div>
+  </div>
+</template>
 
-    <script src="script.js"></script>
-  </body>
+<template id="tpl-education">
+  <div class="entry-card" data-kind="education">
+    <div class="entry-card-head">
+      <span class="entry-tag">education</span>
+      <button class="entry-remove" type="button" aria-label="Remove this entry">✕</button>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>degree</label><input type="text" data-key="title" placeholder="M.E. Computer Engineering" /></div>
+      <div class="field"><label>institution</label><input type="text" data-key="company" placeholder="Institute Name" /></div>
+    </div>
+    <div class="field-row field-row-3">
+      <div class="field"><label>location</label><input type="text" data-key="location" placeholder="City, Country" /></div>
+      <div class="field"><label>start</label><input type="text" data-key="start" placeholder="2024" /></div>
+      <div class="field"><label>end</label><input type="text" data-key="end" placeholder="2026" /></div>
+    </div>
+    <div class="field">
+      <label>details — one per line (GPA, honors, coursework)</label>
+      <textarea rows="2" data-key="bullets" placeholder="CGPA: 9.1 / 10"></textarea>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-cert">
+  <div class="entry-card" data-kind="cert">
+    <div class="entry-card-head">
+      <span class="entry-tag">certification</span>
+      <button class="entry-remove" type="button" aria-label="Remove this entry">✕</button>
+    </div>
+    <div class="field-row field-row-3">
+      <div class="field"><label>name</label><input type="text" data-key="title" placeholder="AWS Certified Developer" /></div>
+      <div class="field"><label>issuer</label><input type="text" data-key="company" placeholder="Amazon Web Services" /></div>
+      <div class="field"><label>date</label><input type="text" data-key="start" placeholder="2025" /></div>
+    </div>
+  </div>
+</template>
+
+<script src="script.js"></script>
+</body>
 </html>
